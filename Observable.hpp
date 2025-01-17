@@ -5,26 +5,26 @@
 #include "Observer.hpp"
 
 namespace s2 {
-    template<typename T>
+    template<typename Context>
     class Observable {
     public:
     // TODO: Add 'property' support
-        void addObserver(/*std::string_view property, */Observer<T>& observer) {
+        void addObserver(Observer<Context>& observer) {
             observers.push_back(&observer);
         }
 
-        void removeObserver(/*std::string_view property, */Observer<T>& observer) {
+        void removeObserver(Observer<Context>& observer) {
             observers.remove(&observer);
         }
 
-        void notifyObservers(/*std::string_view property, */T& context) {
+        void notifyObservers(Context context) {
             for (auto & observer : observers) {
-                (*observer)(context);
+                observer->notify(context);
             }
         }
 
     private:
-        std::list<Observer<T>*> observers;
+        std::list<Observer<Context>*> observers;
     };
 }
 

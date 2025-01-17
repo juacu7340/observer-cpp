@@ -2,10 +2,10 @@
 #define OBSERVER_HPP
 
 namespace s2 {
-    template<typename T>
+    template<typename Context>
     class Observer {
     public:
-        virtual void operator()(T& context) = 0;
+        virtual void notify(Context context) = 0;
     };
 }
 
